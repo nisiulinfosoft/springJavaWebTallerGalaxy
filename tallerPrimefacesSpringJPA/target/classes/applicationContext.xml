@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+                        http://www.springframework.org/schema/data/jpa
+     					http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd">
+
+	<context:component-scan base-package="pe.*">
+		<context:exclude-filter type="aspectj" expression="pe..*ManagedBean*"/>
+	</context:component-scan>
+	
+	<jpa:repositories base-package="pe.edu.galaxy.training.ajw.repository"/>
+
+	<context:property-placeholder location="classpath:/aplicacion.properties" />
+
+	<import resource="dataSourceContext.xml" />
+	
+	<import resource="JpaContext.xml" />
+
+	<import resource="transactionContext.xml" />
+
+</beans>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	    <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+<!--                 <property name="databasePlatform" value="${hibernate.dialect}" /> -->
+<!--                 <property name="showSql" value="${hibernate.show_sql}" /> -->
+            </bean>
+        </property>
+<!--         <property name="jpaProperties"> -->
+<!--           <props> -->
+<!--               <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> -->
+<!--              <prop key="hibernate.dialect">${hibernate.dialect}</prop> -->
+<!--           </props> -->
+<!--        </property> -->
+		<property name="jpaProperties">
+			<value>
+				hibernate.format_sql=${hibernate.format_sql}
+				hibernate.show_sql=${hibernate.show_sql}
+				hibernate.dialect=${hibernate.dialect}
+				hibernate.use_sql_comments=${hibernate.use_sql_comments}
+				hibernate.generate_statistics=${hibernate.generate_statistics}
+				hibernate.hbm2ddl.auto=${hibernate.hbm2ddl.auto}
+			</value>
+		</property>
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+</beans>
